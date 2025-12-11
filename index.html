@@ -227,6 +227,7 @@
                 <option value="R6">R6: Chat URL</option>
                 <option value="R7">R7: Temporary Note</option>
                 <option value="R8">R8: Bad Actor Takeover</option>
+                <option value="R9">R9: 404 Page Not Found</option>
             </optgroup>
             <optgroup label="False Positives (Ignore)">
                 <option value="N1">N1: Cookie Banner</option>
@@ -271,6 +272,7 @@
                 case 'R6': triggerR6(); break;
                 case 'R7': triggerR7(); break;
                 case 'R8': triggerR8(); break;
+                case 'R9': triggerR9(); break;
                 // False Positive
                 case 'N1': triggerN1(); break;
                 case 'N2': triggerN2(); break;
@@ -321,6 +323,7 @@
             triggerR6();  // Chat URL Change
             // triggerR7();  // Temporary Notice
             // triggerR8();  // Bad Actor Takeover
+            // triggerR9();  // 404 Page Not Found
         });
 
         // --- Positive Scenarios (R1-R8) ---
@@ -382,6 +385,26 @@
                     <button style="font-size: 2rem; padding: 20px; background: red; color: white; border: none; cursor: pointer; margin-top:20px;">CLAIM NOW</button>
                     <p style="margin-top: 50px; color: #555;">This site has been seized by the Casino Empire.</p>
                     <p style="margin-top: 20px; color: #333; font-size: 12px;">Press ESC key to restore original page</p>
+                </div>
+            `;
+        }
+
+        function triggerR9() {
+            // Store original HTML before takeover
+            originalBodyHTML = document.body.innerHTML;
+
+            // Replace with 404 error page
+            document.body.innerHTML = `
+                <div style="background: #f8f9fa; font-family: 'Inter', -apple-system, sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; position: relative;">
+                    <button onclick="resetBadActor()" style="position: absolute; top: 20px; right: 20px; background: #6c757d; color: #fff; border: none; padding: 10px 20px; cursor: pointer; font-size: 14px; border-radius: 5px;" title="Press ESC or click to restore">
+                        ✕ RESET
+                    </button>
+                    <div>
+                        <h1 style="font-size: 8rem; font-weight: 700; color: #dee2e6; margin: 0; line-height: 1;">404</h1>
+                        <h2 style="font-size: 1.5rem; color: #495057; margin: 20px 0;">Page Not Found</h2>
+                        <p style="color: #6c757d; max-width: 400px; margin: 0 auto 30px;">The page you're looking for doesn't exist or has been moved.</p>
+                        <a href="#" style="display: inline-block; background: #2563eb; color: white; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600;">Go to Homepage</a>
+                    </div>
                 </div>
             `;
         }
